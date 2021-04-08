@@ -1,12 +1,10 @@
 import React from 'react';
 import './App.css';
+import RefClass from './RefClass';
+import RefFunctional from './RefFunctional';
 
 function App() {
-  return (
-    <div className='App'>
-      <input type='text' />
-    </div>
-  );
+  return <RefFunctional />;
 }
 
 export default App;

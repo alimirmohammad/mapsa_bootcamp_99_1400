@@ -1,5 +1,7 @@
-const CounterHover = ({ increment, count, name, age }) => {
-  console.log(name);
+import useCount from './useCount';
+
+const CounterHover = ({ name, age }) => {
+  const [count, increment] = useCount();
   return (
     <h2 onMouseOver={increment}>
       {name} {age} hovered {count} times

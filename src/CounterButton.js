@@ -1,5 +1,7 @@
-const CounterButton = ({ increment, count, name, age }) => {
-  console.log(name);
+import useCount from './useCount';
+
+const CounterButton = ({ name, age }) => {
+  const [count, increment] = useCount();
   return (
     <button onClick={increment}>
       {name} {age} clicked {count} times

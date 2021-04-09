@@ -1,4 +1,5 @@
 import useCount from './useCount';
+import propTypes from 'prop-types';
 
 const CounterButton = ({ name, age }) => {
   const [count, increment] = useCount();
@@ -7,6 +8,14 @@ const CounterButton = ({ name, age }) => {
       {name} {age} clicked {count} times
     </button>
   );
+};
+
+// CounterButton.defaultProps = {
+//   name: 'Forough'
+// };
+
+CounterButton.propTypes = {
+  name: propTypes.string.isRequired
 };
 
 export default CounterButton;

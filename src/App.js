@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
 import './App.css';
-import CounterButton from './CounterButton';
-import CounterComponent from './CounterComponent';
-import CounterHover from './CounterHover';
-import useInput from './useInput';
+import Modal from './Modal';
 
 function App() {
-  const username = useInput('Farnaz');
-  const password = useInput('');
-
-  const submit = () => {
-    alert(`username: ${username.value}, password: ${password.value}`);
-  };
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className='App'>
-      <CounterHover name='Soosan' age={27} />
-      <CounterButton name={55} age={18} />
-      {/* <input type='text' {...password} />
-      <input type='password' {...password} />
-      <button onClick={submit}>Submit</button> */}
-    </div>
+    <>
+      <div style={{ position: 'relative' }} className='App'>
+        <table>
+          <tr>
+            <td>A</td>
+            <td>B</td>
+          </tr>
+          <tr>
+            <td>C</td>
+            <td>
+              <button onClick={() => setOpen(true)}>Open</button>
+              {open && <Modal onClose={() => setOpen(false)} />}
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div>Ali</div>
+    </>
   );
 }
 

@@ -14,8 +14,8 @@ const CounterButton = ({ name, age }) => {
 //   name: 'Forough'
 // };
 
-CounterButton.propTypes = {
-  name: propTypes.string.isRequired
-};
+// CounterButton.propTypes = {
+//   name: propTypes.string.isRequired
+// };
 
 export default CounterButton;

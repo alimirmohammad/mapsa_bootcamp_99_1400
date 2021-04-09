@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import './App.css';
-import Modal from './Modal';
+const Modal = React.lazy(() => import('./Modal'));
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -9,17 +9,23 @@ function App() {
     <>
       <div style={{ position: 'relative' }} className='App'>
         <table>
-          <tr>
-            <td>A</td>
-            <td>B</td>
-          </tr>
-          <tr>
-            <td>C</td>
-            <td>
-              <button onClick={() => setOpen(true)}>Open</button>
-              {open && <Modal onClose={() => setOpen(false)} />}
-            </td>
-          </tr>
+          <tbody>
+            <tr>
+              <td>A</td>
+              <td>B</td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>
+                <button onClick={() => setOpen(true)}>Open</button>
+                {open && (
+                  <Suspense fallback={<h2>loading...</h2>}>
+                    <Modal onClose={() => setOpen(false)} />
+                  </Suspense>
+                )}
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div>Ali</div>

@@ -1,35 +1,31 @@
-import React, { useState, Suspense } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-const Modal = React.lazy(() => import('./Modal'));
+import { useAsync } from './useAsync';
+import { client } from './utility';
 
 function App() {
-  const [open, setOpen] = useState(false);
+  const { data: todos, error, isPending, isIdle, isFailed, run } = useAsync();
+
+  useEffect(() => {
+    run(client('todos'));
+  }, [run]);
+
+  if (isIdle || isPending) {
+    return <h3>Loading...</h3>;
+  }
+
+  if (isFailed) {
+    return <h3>Something went wrong {error.message}</h3>;
+  }
 
   return (
-    <>
-      <div style={{ position: 'relative' }} className='App'>
-        <table>
-          <tbody>
-            <tr>
-              <td>A</td>
-              <td>B</td>
-            </tr>
-            <tr>
-              <td>C</td>
-              <td>
-                <button onClick={() => setOpen(true)}>Open</button>
-                {open && (
-                  <Suspense fallback={<h2>loading...</h2>}>
-                    <Modal onClose={() => setOpen(false)} />
-                  </Suspense>
-                )}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div>Ali</div>
-    </>
+    <div>
+      <ul>
+        {todos.slice(0, 10).map(item => (
+          <li key={item.id}>{item.title}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
